@@ -1,0 +1,75 @@
+CRUD Operations
+---------------
+- Model.find()
+- Model.findById()
+- Model.findOne()
+- Model.findByIdAndUpdate()
+- Model.findOneAndUpdate()
+- Model.findByIdAndDelete()
+- Model.findOneAndDelete()
+- Model.updateOne()
+- Model.updateMany()
+- Model.deleteOne()
+- Model.deleteMany()
+- Model.replaceOne()
+
+Create & Save
+-------------
+- Model.create()
+- doc.save()
+
+Query Helpers
+-------------
+- .where()
+- .equals()
+- .sort()
+- .limit()
+- .skip()
+- .select()
+- .populate()
+- .lean()
+- .exec()
+
+Validation & Schema
+-------------------
+- Schema.path()
+- Schema.add()
+- Schema.index()
+- Schema.virtual()
+- Schema.pre()
+- Schema.post()
+
+Aggregation
+-----------
+- Model.aggregate()
+
+Transactions
+------------
+- mongoose.startSession()
+- session.startTransaction()
+- session.commitTransaction()
+- session.abortTransaction()
+- session.endSession()
+
+Miscellaneous
+-------------
+- Model.countDocuments()
+- Model.estimatedDocumentCount()
+- Model.distinct()
+- Model.exists()
+- Model.watch()
+- Model.hydrate()
+- Model.discriminator()
+
+Middleware (Hooks)
+------------------
+- schema.pre('save')
+- schema.post('save')
+- schema.pre('find')
+- schema.post('find')
+
+Indexing
+--------
+- Model.createIndexes()
+- Model.dropIndexes()
+- Model.syncIndexes()

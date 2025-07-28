@@ -1,0 +1,179 @@
+CHECK THIS OUT
+
+Naming conventions and stuff
+https://medium.com/@nadinCodeHat/rest-api-naming-conventions-and-best-practices-1c4e781eb6a5
+
+
+subscriptionsTracker
+
+
+NOTES ON SUBSCRIPTIONMODEL IN SCHEMA:
+
+🧠 What Each Line Means:
+🔹 type: mongoose.Schema.Types.ObjectId
+This sets the type of the user field to be a MongoDB ObjectId.
+ObjectId is a 12-byte unique identifier used for MongoDB documents.
+It is how MongoDB stores references between documents (kind of like a foreign key).
+
+🔹 ref: 'User'
+This tells Mongoose:
+"This ObjectId refers to a document in the User collection."
+Enables population (i.e., you can use .populate('user') to fetch full user data).
+
+🔹 required: true
+This field must be present when creating or updating the document.
+Mongoose will throw a validation error if it's missing.
+
+🔹 index: true
+This creates an index on the user field in MongoDB.
+Indexing improves query performance when searching/filtering by this field.
+Especially useful if you’ll be querying documents by user frequently.
+
+
+
+
+
+
+//MIDDLEWARE?
+--------> something that happens before a action
+
+
+✅ express.json()
+Parses application/json request bodies.
+Access with req.body.
+Used for APIs (POST/PUT) sending JSON.
+
+✅ express.urlencoded({ extended: false })
+Parses application/x-www-form-urlencoded (HTML form data).
+extended: false = supports simple key-value pairs.
+Access with req.body.
+
+✅ cookie-parser()
+Parses cookies from the request headers.
+Access with req.cookies.token, etc.
+Used for sessions, JWT auth, preferences.
+
+Middleware	Parses	Exposes data via	Use Case
+express.json()	JSON request bodies	req.body	APIs with JSON payloads
+express.urlencoded({...})	Form URL-encoded bodies	req.body	HTML form submissions
+cookie-parser()	Cookie headers	req.cookies	Auth, sessions, preferences
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NOW FOR AUTH JWT
+MAINLY BY USING CONTROLLERS
+
+A Controller is a core part of the MVC (Model-View-Controller) architecture used in backend development. It:
+
+CORE LOGIC in controllers  ---> Handles incoming HTTP requests, processes them, and sends responses.
+
+
+Routes define what endpoint is hit.
+Controllers define what to do when it's hit.
+
+ROUTES --------> CONTROLLER {For LOGIC core}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+IN CONTROLLERS
+
+// A ---> Atomicity ---> Transactions are all-or-nothing: if one part fails, everything rolls back.
+// C ---> Consistency ---> Ensures the database follows all rules and constraints before and after the transaction.
+// I ---> Isolation ---> Keeps transactions separated so they don’t interfere with each other, even when run concurrently.
+// D ---> Durability ---> Once committed, the transaction’s data is permanently saved, even in case of crashes.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// C ---> Consistency ---> All nodes see the same data at the same time (no stale reads).
+// A ---> Availability ---> Every request receives a (non-error) response, even if not the latest.
+// P ---> Partition Tolerance ---> System continues to function despite network failures between nodes.
+
+🧠 In distributed systems, you can only guarantee two out of the three at any time: C, A, or P.
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+TRANSACTION: 
+
+A transaction in databases is a sequence of operations performed as a single logical unit of work that must either fully succeed or fully fail — all-or-nothing.
+
+// A transaction ensures:
+// - All steps succeed, or none are applied (Atomicity).
+// - Data stays valid and rules are enforced (Consistency).
+// - Transactions run independently (Isolation).
+// - Changes are saved even after crashes (Durability).
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+mongoose.startSession()
+Starts a new database session — like opening a dedicated tab to talk to MongoDB.
+
+session.startTransaction()
+Begins the actual transaction.
+From this point on, any DB write ops (create/update/delete) tied to this session will be tracked.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+After sign in Controller do User controller to fetch and show all users
+
+MIDDLEWARE alls got next(); as ending status / response
+next() // cuz they forward it over to the next function
+
+from user.routes add middleware for getuser of authorize from auth.controller,js
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+NOW FOR RATELIMITING USING ARCJET;
+
+
+
+
+
+
+
+
+
+
+
+FINALLY CREATED WORKFLOW ROUTER AND UPSTASH.JS
+
+
+REMEMBER FOR EVERY ROUTE FILE A CONTROLLER FILE NEEDED FOR LOGIC
+
+WORKFLOW? ---------> to send remindeers using email
+
+
+
+
+
+
+🛠️ What is QStash?
+QStash is a serverless, HTTP-based job queue.
+
+Instead of pushing jobs to a queue and polling (like RabbitMQ or BullMQ), QStash:
+
+delivers HTTP POST requests to your API endpoint
+
+Supports delays, retries, scheduling, CRON jobs
+
+Ideal for serverless apps, edge functions, and low-maintenance backends
+
+
+
+
+
+
+
+
+
+
+
+MAiN FOR LOCAL DEVELOPMENT SERVER SERVER_URL IN ENV SEE WHY IT DOES
+The qstash-cli is a development helper tool provided by Upstash QStash that lets you test QStash jobs locally before deploying them to production.
+
+
+npx @upstash/qstash-cli dev
